@@ -1,7 +1,10 @@
+let map = {};
+
 let combinationSum = function (candidates, target) {
   let result = [];
   let duplicate = [];
   for (let val of candidates) {
+    if (findDuplicate(duplicate, val)) continue;
     if (val > target) continue;
     if (target == val) {
       result.push([val]);
@@ -10,15 +13,30 @@ let combinationSum = function (candidates, target) {
     duplicate.push(target - val);
     concat(combinationSum(candidates, val), combinationSum(candidates, target - val), result);
   }
+
   if (result.length) {
+    map[target] = result;
     return result;
   } else {
     return false;
   }
 };
 
-for (let val of combinationSum([2, 3, 4, 7], 7)) {
+function isInMap(candidates, val) {
+
+}
+
+for (let val of combinationSum([3, 6, 5, 4, 11, 10, 9, 12], 21)) {
   console.log(val);
+}
+
+function findDuplicate(arr, target) {
+  for (let i of arr) {
+    if (i === target) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function concat(arr1, arr2, result) {
