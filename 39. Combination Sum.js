@@ -23,7 +23,9 @@ let combinationSum = function (candidates, target) {
 };
 
 function isInMap(candidates, val) {
-
+  if(val in map) {
+    return map
+  }
 }
 
 for (let val of combinationSum([3, 6, 5, 4, 11, 10, 9, 12], 21)) {
