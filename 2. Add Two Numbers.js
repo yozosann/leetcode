@@ -19,13 +19,34 @@ function linkGen(arr) {
 }
 
 var addTwoNumbers = function (l1, l2) {
+  if (l1.val === 0) {
+    return l2;
+  } else if (l2.val === 0) {
+    return l1;
+  }
   let resultArr = [];
-  while (l1) {
-    let result = l1.val + l2.val;
+  let temp;
+  while ((l1 && l2) || temp) {
+    if (!(l1 && l2)) {
+      if (l1) {
+        resultArr.push(temp + l1.val);
+        return resultArr;
+      }
+      else if (l2) {
+        resultArr.push(temp + l2.val);
+        return resultArr;
+      }
+      else {
+        resultArr.push(temp);
+        return resultArr;
+      }
+    }
+    let result = l1.val + l2.val + temp;
     if (result > 9) {
-      l1.next.val++;
+      temp = 1;
       resultArr.push(result - 10);
     } else {
+      temp = 0;
       resultArr.push(result);
     }
     l1 = l1.next;
@@ -40,4 +61,4 @@ function read(l) {
     l = l.next;
   }
 }
-console.log(read(addTwoNumbers(linkGen(linkOne), linkGen(linkTwo))));
+console.log(read(addTwoNumbers(linkGen([5]), linkGen([5]))));
