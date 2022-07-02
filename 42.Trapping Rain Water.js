@@ -2,6 +2,8 @@
  * @param {number[]} height
  * @return {number}
  */
+
+// 单调栈
 var trap = function(height) {
     let res = 0;
     const stack = [];
